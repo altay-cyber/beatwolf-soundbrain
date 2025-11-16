@@ -131,12 +131,25 @@ const Home = () => {
         }
         setAudioLevel(0);
         
+        // Stop timer
+        if (timerIntervalRef.current) {
+          clearInterval(timerIntervalRef.current);
+        }
+        setRecordingTime(0);
+        
         // Stop all tracks
         stream.getTracks().forEach(track => track.stop());
       };
 
       mediaRecorderRef.current.start();
       setIsRecording(true);
+      setRecordingTime(0);
+      
+      // Start timer
+      timerIntervalRef.current = setInterval(() => {
+        setRecordingTime((prev) => prev + 1);
+      }, 1000);
+      
       toast.success(tr.recordingStarted);
     } catch (error) {
       console.error("Error accessing microphone:", error);
