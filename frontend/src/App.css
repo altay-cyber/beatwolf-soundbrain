@@ -97,7 +97,6 @@ body {
 }
 
 .tab-trigger {
-  flex: 1;
   padding: 1rem 1.5rem;
   border-radius: 12px;
   background: transparent;
@@ -110,6 +109,7 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .tab-trigger:hover {
