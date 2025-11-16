@@ -257,7 +257,7 @@ const Home = () => {
                   data-testid="add-to-favorites-button"
                 >
                   <Heart className="w-3 h-3 mr-1" />
-                  Favorite
+                  {tr.addToFavorites}
                 </Button>
               )}
               {showDeleteButton && (
@@ -265,11 +265,11 @@ const Home = () => {
                   size="sm"
                   variant="outline"
                   onClick={() => onDelete(song.id)}
-                  className="song-action-button text-red-400 hover:text-red-300"
+                  className="song-action-button text-red-600 hover:text-red-700"
                   data-testid="delete-button"
                 >
                   <Trash2 className="w-3 h-3 mr-1" />
-                  Delete
+                  {tr.delete}
                 </Button>
               )}
             </div>
