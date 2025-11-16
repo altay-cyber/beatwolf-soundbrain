@@ -192,20 +192,20 @@ const Home = () => {
   const removeFromFavorites = async (id) => {
     try {
       await axios.delete(`${API}/favorites/${id}`);
-      toast.success("Removed from favorites");
+      toast.success(tr.removedFromFavorites);
       fetchFavorites();
     } catch (error) {
-      toast.error("Could not remove from favorites");
+      toast.error(tr.couldNotRemoveFromFavorites);
     }
   };
 
   const deleteHistoryItem = async (id) => {
     try {
       await axios.delete(`${API}/history/${id}`);
-      toast.success("Deleted from history");
+      toast.success(tr.deletedFromHistory);
       fetchHistory();
     } catch (error) {
-      toast.error("Could not delete from history");
+      toast.error(tr.couldNotDeleteFromHistory);
     }
   };
 
