@@ -79,7 +79,7 @@ body {
 }
 
 .tabs-container {
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -89,8 +89,9 @@ body {
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 0.75rem;
-  display: flex;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
