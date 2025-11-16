@@ -26,6 +26,41 @@ const Home = () => {
   const analyserRef = useRef(null);
   const animationFrameRef = useRef(null);
 
+  // Türkçe dil desteği
+  const tr = {
+    appName: "BeatWolf",
+    subtitle: "Saniyeler içinde herhangi bir şarkıyı keşfedin",
+    identify: "Tanımla",
+    history: "Geçmiş",
+    favorites: "Favoriler",
+    startRecording: "Kayda Başla",
+    stopRecording: "Kaydı Durdur",
+    identifying: "Tanımlanıyor...",
+    identifiedSong: "Tanımlanan Şarkı",
+    recentIdentifications: "Son Tanımlamalar",
+    yourFavorites: "Favorileriniz",
+    noHistoryYet: "Henüz geçmiş yok",
+    startIdentifying: "Şarkıları tanımlamaya başlayın",
+    noFavoritesYet: "Henüz favori yok",
+    addFavorites: "Şarkıları favorilerinize ekleyin",
+    addToFavorites: "Favorilere Ekle",
+    delete: "Sil",
+    released: "Yayınlandı",
+    recordingStarted: "Kayıt başladı! 5-10 saniye ses kaydedin",
+    couldNotAccessMic: "Mikrofona erişilemedi",
+    found: "Bulundu",
+    by: "sanatçısı",
+    addedToFavorites: "Favorilere eklendi!",
+    couldNotAddToFavorites: "Favorilere eklenemedi",
+    removedFromFavorites: "Favorilerden kaldırıldı",
+    couldNotRemoveFromFavorites: "Favorilerden kaldırılamadı",
+    deletedFromHistory: "Geçmişten silindi",
+    couldNotDeleteFromHistory: "Geçmişten silinemedi",
+    couldNotIdentify: "Şarkı tanımlanamadı",
+    copyright: "© 2025 BeatWolf. Tüm hakları saklıdır.",
+    poweredBy: "Powered by AudD API"
+  };
+
   useEffect(() => {
     fetchHistory();
     fetchFavorites();
