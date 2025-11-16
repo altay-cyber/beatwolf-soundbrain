@@ -135,7 +135,7 @@ const Home = () => {
 
       mediaRecorderRef.current.start();
       setIsRecording(true);
-      toast.success("Recording started! Capture 5-10 seconds of audio");
+      toast.success(tr.recordingStarted);
     } catch (error) {
       console.error("Error accessing microphone:", error);
       toast.error("Could not access microphone");
