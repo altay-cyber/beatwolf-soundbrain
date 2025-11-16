@@ -310,20 +310,39 @@ body {
   text-align: center;
 }
 
+.footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 0.5rem;
+}
+
+.powered-by {
+  font-size: 0.875rem;
+  color: #a0aec0;
+  font-weight: 500;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: #f7fafc;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 107, 53, 0.5);
+  background: #cbd5e0;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 107, 53, 0.7);
+  background: #a0aec0;
 }
