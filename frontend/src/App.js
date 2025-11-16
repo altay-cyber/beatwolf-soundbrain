@@ -226,10 +226,10 @@ const Home = () => {
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-white truncate" data-testid="song-title">{song.title}</h3>
-            <p className="text-gray-300 truncate" data-testid="song-artist">{song.artist}</p>
-            {song.album && <p className="text-sm text-gray-400 truncate" data-testid="song-album">{song.album}</p>}
-            {song.release_date && <p className="text-xs text-gray-500 mt-1" data-testid="song-release-date">Released: {song.release_date}</p>}
+            <h3 className="text-lg font-bold text-gray-900 truncate" data-testid="song-title">{song.title}</h3>
+            <p className="text-gray-700 truncate" data-testid="song-artist">{song.artist}</p>
+            {song.album && <p className="text-sm text-gray-600 truncate" data-testid="song-album">{song.album}</p>}
+            {song.release_date && <p className="text-xs text-gray-500 mt-1" data-testid="song-release-date">{tr.released}: {song.release_date}</p>}
             
             <div className="flex gap-2 mt-3 flex-wrap">
               {song.spotify_url && (
