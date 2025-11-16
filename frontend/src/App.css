@@ -174,6 +174,18 @@ body {
   animation: pulse-ring 2s ease-out infinite;
 }
 
+.recording-timer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
 @keyframes pulse-ring {
   0% {
     transform: scale(0.8);
