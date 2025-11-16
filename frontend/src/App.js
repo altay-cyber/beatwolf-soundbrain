@@ -182,10 +182,10 @@ const Home = () => {
         spotify_url: song.spotify_url,
         apple_music_url: song.apple_music_url,
       });
-      toast.success("Added to favorites!");
+      toast.success(tr.addedToFavorites);
       fetchFavorites();
     } catch (error) {
-      toast.error(error.response?.data?.detail || "Could not add to favorites");
+      toast.error(error.response?.data?.detail || tr.couldNotAddToFavorites);
     }
   };
 
