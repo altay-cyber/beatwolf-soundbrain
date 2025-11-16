@@ -286,24 +286,24 @@ const Home = () => {
           <div className="logo-circle">
             <Music className="w-8 h-8 text-white" />
           </div>
-          <h1 className="app-title" data-testid="app-title">SongMatch</h1>
+          <h1 className="app-title" data-testid="app-title">{tr.appName}</h1>
         </div>
-        <p className="app-subtitle" data-testid="app-subtitle">Discover any song in seconds</p>
+        <p className="app-subtitle" data-testid="app-subtitle">{tr.subtitle}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="tabs-container">
         <TabsList className="tabs-list">
           <TabsTrigger value="identify" className="tab-trigger" data-testid="tab-identify">
             <Sparkles className="w-4 h-4 mr-2" />
-            Identify
+            {tr.identify}
           </TabsTrigger>
           <TabsTrigger value="history" className="tab-trigger" data-testid="tab-history">
             <Clock className="w-4 h-4 mr-2" />
-            History
+            {tr.history}
           </TabsTrigger>
           <TabsTrigger value="favorites" className="tab-trigger" data-testid="tab-favorites">
             <Heart className="w-4 h-4 mr-2" />
-            Favorites
+            {tr.favorites}
           </TabsTrigger>
         </TabsList>
 
