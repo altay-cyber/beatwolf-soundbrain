@@ -327,6 +327,11 @@ const Home = () => {
             <div className="recording-visualizer" style={{ '--audio-level': audioLevel }} data-testid="recording-visualizer">
               <div className="visualizer-circle" />
               <div className="visualizer-pulse" />
+              {isRecording && (
+                <div className="recording-timer" data-testid="recording-timer">
+                  {Math.floor(recordingTime / 60)}:{String(recordingTime % 60).padStart(2, '0')}
+                </div>
+              )}
             </div>
 
             <Button
