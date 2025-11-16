@@ -138,7 +138,7 @@ const Home = () => {
       toast.success(tr.recordingStarted);
     } catch (error) {
       console.error("Error accessing microphone:", error);
-      toast.error("Could not access microphone");
+      toast.error(tr.couldNotAccessMic);
     }
   };
 
