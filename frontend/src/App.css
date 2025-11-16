@@ -79,7 +79,7 @@ body {
 }
 
 .tabs-container {
-  max-width: 100%;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -88,7 +88,7 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  padding: 0.75rem;
+  padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
