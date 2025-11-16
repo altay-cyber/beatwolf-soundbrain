@@ -349,12 +349,12 @@ const Home = () => {
 
         <TabsContent value="history" className="tab-content">
           <div className="list-section" data-testid="history-list">
-            <h2 className="section-title">Recent Identifications</h2>
+            <h2 className="section-title">{tr.recentIdentifications}</h2>
             {history.length === 0 ? (
               <div className="empty-state" data-testid="empty-history">
-                <Clock className="w-12 h-12 text-gray-500 mb-2" />
-                <p className="text-gray-400">No history yet</p>
-                <p className="text-sm text-gray-500">Start identifying songs to see them here</p>
+                <Clock className="w-12 h-12 text-gray-400 mb-2" />
+                <p className="text-gray-600">{tr.noHistoryYet}</p>
+                <p className="text-sm text-gray-500">{tr.startIdentifying}</p>
               </div>
             ) : (
               <div className="songs-grid">
@@ -374,12 +374,12 @@ const Home = () => {
 
         <TabsContent value="favorites" className="tab-content">
           <div className="list-section" data-testid="favorites-list">
-            <h2 className="section-title">Your Favorites</h2>
+            <h2 className="section-title">{tr.yourFavorites}</h2>
             {favorites.length === 0 ? (
               <div className="empty-state" data-testid="empty-favorites">
-                <Heart className="w-12 h-12 text-gray-500 mb-2" />
-                <p className="text-gray-400">No favorites yet</p>
-                <p className="text-sm text-gray-500">Add songs to your favorites to see them here</p>
+                <Heart className="w-12 h-12 text-gray-400 mb-2" />
+                <p className="text-gray-600">{tr.noFavoritesYet}</p>
+                <p className="text-sm text-gray-500">{tr.addFavorites}</p>
               </div>
             ) : (
               <div className="songs-grid">
@@ -397,6 +397,11 @@ const Home = () => {
           </div>
         </TabsContent>
       </Tabs>
+
+      <footer className="footer">
+        <p className="copyright">{tr.copyright}</p>
+        <p className="powered-by">{tr.poweredBy}</p>
+      </footer>
     </div>
   );
 };
