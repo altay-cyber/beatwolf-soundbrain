@@ -8,9 +8,9 @@
 
 body {
   font-family: 'Space Grotesk', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #dde3ea 100%);
   min-height: 100vh;
-  color: white;
+  color: #1a202c;
 }
 
 .App {
@@ -22,6 +22,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  padding-bottom: 5rem;
 }
 
 .hero-section {
