@@ -324,7 +324,13 @@ const Home = () => {
 
         <TabsContent value="identify" className="tab-content">
           <div className="identify-section">
-            <div className="recording-visualizer" style={{ '--audio-level': audioLevel }} data-testid="recording-visualizer">
+            <div 
+              className="recording-visualizer" 
+              style={{ '--audio-level': audioLevel }} 
+              data-testid="recording-visualizer"
+              onClick={!isIdentifying ? (isRecording ? stopRecording : startRecording) : null}
+              style={{ cursor: isIdentifying ? 'default' : 'pointer' }}
+            >
               <div className="visualizer-circle" />
               <div className="visualizer-pulse" />
               {isRecording && (
