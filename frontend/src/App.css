@@ -153,6 +153,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.recording-visualizer:hover {
+  transform: scale(1.05);
+}
+
+.recording-visualizer:active {
+  transform: scale(0.98);
 }
 
 .visualizer-circle {
