@@ -19,12 +19,14 @@ const Home = () => {
   const [favorites, setFavorites] = useState([]);
   const [activeTab, setActiveTab] = useState("identify");
   const [audioLevel, setAudioLevel] = useState(0);
+  const [recordingTime, setRecordingTime] = useState(0);
   
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const timerIntervalRef = useRef(null);
 
   // Türkçe dil desteği
   const tr = {
