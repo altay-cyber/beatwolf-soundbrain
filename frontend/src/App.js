@@ -160,11 +160,11 @@ const Home = () => {
       });
 
       setIdentifiedSong(response.data);
-      toast.success(`Found: ${response.data.title} by ${response.data.artist}`);
+      toast.success(`${tr.found}: ${response.data.title} ${tr.by} ${response.data.artist}`);
       fetchHistory();
     } catch (error) {
       console.error("Error identifying song:", error);
-      toast.error(error.response?.data?.detail || "Could not identify song");
+      toast.error(error.response?.data?.detail || tr.couldNotIdentify);
     } finally {
       setIsIdentifying(false);
     }
