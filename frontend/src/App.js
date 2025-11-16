@@ -323,24 +323,24 @@ const Home = () => {
               {isRecording ? (
                 <>
                   <Square className="w-6 h-6 mr-2" />
-                  Stop Recording
+                  {tr.stopRecording}
                 </>
               ) : isIdentifying ? (
                 <>
                   <Sparkles className="w-6 h-6 mr-2 animate-spin" />
-                  Identifying...
+                  {tr.identifying}
                 </>
               ) : (
                 <>
                   <Mic className="w-6 h-6 mr-2" />
-                  Start Recording
+                  {tr.startRecording}
                 </>
               )}
             </Button>
 
             {identifiedSong && (
               <div className="result-section" data-testid="identified-song-result">
-                <h2 className="result-title">Identified Song</h2>
+                <h2 className="result-title">{tr.identifiedSong}</h2>
                 <SongCard song={identifiedSong} showFavoriteButton={true} />
               </div>
             )}
