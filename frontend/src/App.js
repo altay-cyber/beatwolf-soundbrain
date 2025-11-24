@@ -198,7 +198,7 @@ const Home = () => {
       toast.success(t.recordingStarted);
     } catch (error) {
       console.error("Error accessing microphone:", error);
-      toast.error(tr.couldNotAccessMic);
+      toast.error(t.couldNotAccessMic);
     }
   };
 
@@ -220,11 +220,11 @@ const Home = () => {
       });
 
       setIdentifiedSong(response.data);
-      toast.success(`${tr.found}: ${response.data.title} ${tr.by} ${response.data.artist}`);
+      toast.success(`${t.found}: ${response.data.title} ${t.by} ${response.data.artist}`);
       fetchHistory();
     } catch (error) {
       console.error("Error identifying song:", error);
-      toast.error(error.response?.data?.detail || tr.couldNotIdentify);
+      toast.error(error.response?.data?.detail || t.couldNotIdentify);
     } finally {
       setIsIdentifying(false);
     }
@@ -242,30 +242,30 @@ const Home = () => {
         spotify_url: song.spotify_url,
         apple_music_url: song.apple_music_url,
       });
-      toast.success(tr.addedToFavorites);
+      toast.success(t.addedToFavorites);
       fetchFavorites();
     } catch (error) {
-      toast.error(error.response?.data?.detail || tr.couldNotAddToFavorites);
+      toast.error(error.response?.data?.detail || t.couldNotAddToFavorites);
     }
   };
 
   const removeFromFavorites = async (id) => {
     try {
       await axios.delete(`${API}/favorites/${id}`);
-      toast.success(tr.removedFromFavorites);
+      toast.success(t.removedFromFavorites);
       fetchFavorites();
     } catch (error) {
-      toast.error(tr.couldNotRemoveFromFavorites);
+      toast.error(t.couldNotRemoveFromFavorites);
     }
   };
 
   const deleteHistoryItem = async (id) => {
     try {
       await axios.delete(`${API}/history/${id}`);
-      toast.success(tr.deletedFromHistory);
+      toast.success(t.deletedFromHistory);
       fetchHistory();
     } catch (error) {
-      toast.error(tr.couldNotDeleteFromHistory);
+      toast.error(t.couldNotDeleteFromHistory);
     }
   };
 
@@ -289,7 +289,7 @@ const Home = () => {
             <h3 className="text-lg font-bold text-gray-900 truncate" data-testid="song-title">{song.title}</h3>
             <p className="text-gray-700 truncate" data-testid="song-artist">{song.artist}</p>
             {song.album && <p className="text-sm text-gray-600 truncate" data-testid="song-album">{song.album}</p>}
-            {song.release_date && <p className="text-xs text-gray-500 mt-1" data-testid="song-release-date">{tr.released}: {song.release_date}</p>}
+            {song.release_date && <p className="text-xs text-gray-500 mt-1" data-testid="song-release-date">{t.released}: {song.release_date}</p>}
             
             <div className="flex gap-2 mt-3 flex-wrap">
               {song.spotify_url && (
@@ -317,7 +317,7 @@ const Home = () => {
                   data-testid="add-to-favorites-button"
                 >
                   <Heart className="w-3 h-3 mr-1" />
-                  {tr.addToFavorites}
+                  {t.addToFavorites}
                 </Button>
               )}
               {showDeleteButton && (
@@ -329,7 +329,7 @@ const Home = () => {
                   data-testid="delete-button"
                 >
                   <Trash2 className="w-3 h-3 mr-1" />
-                  {tr.delete}
+                  {t.delete}
                 </Button>
               )}
             </div>
@@ -346,24 +346,24 @@ const Home = () => {
           <div className="logo-circle">
             <Music className="w-8 h-8 text-white" />
           </div>
-          <h1 className="app-title" data-testid="app-title">{tr.appName}</h1>
+          <h1 className="app-title" data-testid="app-title">{t.appName}</h1>
         </div>
-        <p className="app-subtitle" data-testid="app-subtitle">{tr.subtitle}</p>
+        <p className="app-subtitle" data-testid="app-subtitle">{t.subtitle}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="tabs-container">
         <TabsList className="tabs-list">
           <TabsTrigger value="identify" className="tab-trigger" data-testid="tab-identify">
             <Sparkles className="w-4 h-4 mr-2" />
-            {tr.identify}
+            {t.identify}
           </TabsTrigger>
           <TabsTrigger value="history" className="tab-trigger" data-testid="tab-history">
             <Clock className="w-4 h-4 mr-2" />
-            {tr.history}
+            {t.history}
           </TabsTrigger>
           <TabsTrigger value="favorites" className="tab-trigger" data-testid="tab-favorites">
             <Heart className="w-4 h-4 mr-2" />
-            {tr.favorites}
+            {t.favorites}
           </TabsTrigger>
         </TabsList>
 
@@ -394,24 +394,24 @@ const Home = () => {
               {isRecording ? (
                 <>
                   <Square className="w-6 h-6 mr-2" />
-                  {tr.stopRecording}
+                  {t.stopRecording}
                 </>
               ) : isIdentifying ? (
                 <>
                   <Sparkles className="w-6 h-6 mr-2 animate-spin" />
-                  {tr.identifying}
+                  {t.identifying}
                 </>
               ) : (
                 <>
                   <Mic className="w-6 h-6 mr-2" />
-                  {tr.startRecording}
+                  {t.startRecording}
                 </>
               )}
             </Button>
 
             {identifiedSong && (
               <div className="result-section" data-testid="identified-song-result">
-                <h2 className="result-title">{tr.identifiedSong}</h2>
+                <h2 className="result-title">{t.identifiedSong}</h2>
                 <SongCard song={identifiedSong} showFavoriteButton={true} />
               </div>
             )}
@@ -420,12 +420,12 @@ const Home = () => {
 
         <TabsContent value="history" className="tab-content">
           <div className="list-section" data-testid="history-list">
-            <h2 className="section-title">{tr.recentIdentifications}</h2>
+            <h2 className="section-title">{t.recentIdentifications}</h2>
             {history.length === 0 ? (
               <div className="empty-state" data-testid="empty-history">
                 <Clock className="w-12 h-12 text-gray-400 mb-2" />
-                <p className="text-gray-600">{tr.noHistoryYet}</p>
-                <p className="text-sm text-gray-500">{tr.startIdentifying}</p>
+                <p className="text-gray-600">{t.noHistoryYet}</p>
+                <p className="text-sm text-gray-500">{t.startIdentifying}</p>
               </div>
             ) : (
               <div className="songs-grid">
@@ -445,12 +445,12 @@ const Home = () => {
 
         <TabsContent value="favorites" className="tab-content">
           <div className="list-section" data-testid="favorites-list">
-            <h2 className="section-title">{tr.yourFavorites}</h2>
+            <h2 className="section-title">{t.yourFavorites}</h2>
             {favorites.length === 0 ? (
               <div className="empty-state" data-testid="empty-favorites">
                 <Heart className="w-12 h-12 text-gray-400 mb-2" />
-                <p className="text-gray-600">{tr.noFavoritesYet}</p>
-                <p className="text-sm text-gray-500">{tr.addFavorites}</p>
+                <p className="text-gray-600">{t.noFavoritesYet}</p>
+                <p className="text-sm text-gray-500">{t.addFavorites}</p>
               </div>
             ) : (
               <div className="songs-grid">
@@ -470,8 +470,8 @@ const Home = () => {
       </Tabs>
 
       <footer className="footer">
-        <p className="copyright">{tr.copyright}</p>
-        <p className="powered-by">{tr.poweredBy}</p>
+        <p className="copyright">{t.copyright}</p>
+        <p className="powered-by">{t.poweredBy}</p>
       </footer>
     </div>
   );
