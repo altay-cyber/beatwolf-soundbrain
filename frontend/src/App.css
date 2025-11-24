@@ -29,6 +29,41 @@ body {
   text-align: center;
   margin-bottom: 3rem;
   padding: 2rem 0;
+  position: relative;
+}
+
+.language-switcher {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.25rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.lang-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: #718096;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  background: #f7fafc;
+  color: #2d3748;
+}
+
+.lang-btn.active {
+  background: #2d3748;
+  color: white;
 }
 
 .logo-container {
