@@ -63,7 +63,43 @@ const Home = () => {
     couldNotIdentify: "Şarkı tanımlanamadı",
     copyright: "© 2025 BeatWolf. Tüm hakları saklıdır.",
     poweredBy: "Powered by AudD API"
+  },
+    en: {
+      appName: "BeatWolf",
+      subtitle: "Discover any song in seconds",
+      identify: "Identify",
+      history: "History",
+      favorites: "Favorites",
+      startRecording: "Start Recording",
+      stopRecording: "Stop Recording",
+      identifying: "Identifying...",
+      identifiedSong: "Identified Song",
+      recentIdentifications: "Recent Identifications",
+      yourFavorites: "Your Favorites",
+      noHistoryYet: "No history yet",
+      startIdentifying: "Start identifying songs to see them here",
+      noFavoritesYet: "No favorites yet",
+      addFavorites: "Add songs to your favorites to see them here",
+      addToFavorites: "Add to Favorites",
+      delete: "Delete",
+      released: "Released",
+      recordingStarted: "Recording started! Capture 5-10 seconds of audio",
+      couldNotAccessMic: "Could not access microphone",
+      found: "Found",
+      by: "by",
+      addedToFavorites: "Added to favorites!",
+      couldNotAddToFavorites: "Could not add to favorites",
+      removedFromFavorites: "Removed from favorites",
+      couldNotRemoveFromFavorites: "Could not remove from favorites",
+      deletedFromHistory: "Deleted from history",
+      couldNotDeleteFromHistory: "Could not delete from history",
+      couldNotIdentify: "Could not identify song",
+      copyright: "© 2025 BeatWolf. All rights reserved.",
+      poweredBy: "Powered by AudD API"
+    }
   };
+
+  const t = translations[language];
 
   useEffect(() => {
     fetchHistory();
