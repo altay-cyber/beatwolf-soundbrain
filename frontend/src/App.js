@@ -370,15 +370,15 @@ const Home = () => {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="tabs-container">
         <TabsList className="tabs-list">
           <TabsTrigger value="identify" className="tab-trigger" data-testid="tab-identify">
-            <Sparkles className="w-4 h-4 mr-2" />
+            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
             {t.identify}
           </TabsTrigger>
           <TabsTrigger value="history" className="tab-trigger" data-testid="tab-history">
-            <Clock className="w-4 h-4 mr-2" />
+            <Clock className="w-3.5 h-3.5 mr-1.5" />
             {t.history}
           </TabsTrigger>
           <TabsTrigger value="favorites" className="tab-trigger" data-testid="tab-favorites">
-            <Heart className="w-4 h-4 mr-2" />
+            <Heart className="w-3.5 h-3.5 mr-1.5" />
             {t.favorites}
           </TabsTrigger>
         </TabsList>
