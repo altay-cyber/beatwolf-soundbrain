@@ -342,6 +342,22 @@ const Home = () => {
   return (
     <div className="app-container">
       <div className="hero-section">
+        <div className="language-switcher" data-testid="language-switcher">
+          <button 
+            className={`lang-btn ${language === 'tr' ? 'active' : ''}`}
+            onClick={() => setLanguage('tr')}
+            data-testid="lang-btn-tr"
+          >
+            TR
+          </button>
+          <button 
+            className={`lang-btn ${language === 'en' ? 'active' : ''}`}
+            onClick={() => setLanguage('en')}
+            data-testid="lang-btn-en"
+          >
+            EN
+          </button>
+        </div>
         <div className="logo-container">
           <div className="logo-circle">
             <Music className="w-8 h-8 text-white" />
