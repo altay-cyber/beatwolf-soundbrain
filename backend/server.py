@@ -97,13 +97,15 @@ async def identify_song(file: UploadFile = File(...)):
         
         # Call AudD API
         async with aiohttp.ClientSession() as session:
-            data = aiohttp.FormData()
-            data.add_field('file', open(temp_path, 'rb'), filename='audio.wav')
-            data.add_field('api_token', AUDD_API_KEY)
-            data.add_field('return', 'apple_music,spotify')
-            
-            async with session.post(AUDD_API_URL, data=data) as response:
-                result = await response.json()
+            with open(temp_path, 'rb') as audio_file:
+                data = aiohttp.FormData()
+                filename = f'audio{file_ext}'
+                data.add_field('file', audio_file, filename=filename, content_type=file.content_type or 'audio/webm')
+                data.add_field('api_token', AUDD_API_KEY)
+                data.add_field('return', 'apple_music,spotify')
+                
+                async with session.post(AUDD_API_URL, data=data) as response:
+                    result = await response.json()
         
         # Clean up temp file
         os.unlink(temp_path)
