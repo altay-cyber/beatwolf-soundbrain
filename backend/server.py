@@ -86,8 +86,11 @@ async def root():
 @api_router.post("/identify")
 async def identify_song(file: UploadFile = File(...)):
     try:
+        # Determine file extension
+        file_ext = ".webm" if "webm" in file.content_type else ".wav"
+        
         # Save uploaded file temporarily
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_file:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=file_ext) as temp_file:
             content = await file.read()
             temp_file.write(content)
             temp_path = temp_file.name
