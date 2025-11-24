@@ -185,10 +185,17 @@ const Home = () => {
       
       // Start timer
       timerIntervalRef.current = setInterval(() => {
-        setRecordingTime((prev) => prev + 1);
+        setRecordingTime((prev) => {
+          const newTime = prev + 1;
+          // Auto stop after 10 seconds
+          if (newTime >= 10) {
+            stopRecording();
+          }
+          return newTime;
+        });
       }, 1000);
       
-      toast.success(tr.recordingStarted);
+      toast.success(t.recordingStarted);
     } catch (error) {
       console.error("Error accessing microphone:", error);
       toast.error(tr.couldNotAccessMic);
