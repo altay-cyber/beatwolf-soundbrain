@@ -146,8 +146,23 @@ const Home = () => {
 
   const startRecording = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorderRef.current = new MediaRecorder(stream);
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          sampleRate: 44100
+        } 
+      });
+      
+      // Try to use audio/webm or audio/wav
+      const mimeType = MediaRecorder.isTypeSupported('audio/webm') 
+        ? 'audio/webm' 
+        : 'audio/wav';
+      
+      mediaRecorderRef.current = new MediaRecorder(stream, {
+        mimeType: mimeType,
+        audioBitsPerSecond: 128000
+      });
       audioChunksRef.current = [];
 
       visualizeAudio(stream);
