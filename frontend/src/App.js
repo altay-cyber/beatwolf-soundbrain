@@ -229,7 +229,8 @@ const Home = () => {
     setIsIdentifying(true);
     try {
       const formData = new FormData();
-      formData.append("file", audioBlob, "recording.wav");
+      const fileName = audioBlob.type.includes('webm') ? "recording.webm" : "recording.wav";
+      formData.append("file", audioBlob, fileName);
 
       const response = await axios.post(`${API}/identify`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
