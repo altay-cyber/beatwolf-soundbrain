@@ -20,6 +20,7 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState("identify");
   const [audioLevel, setAudioLevel] = useState(0);
   const [recordingTime, setRecordingTime] = useState(0);
+  const [language, setLanguage] = useState("tr");
   
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -28,8 +29,9 @@ const Home = () => {
   const animationFrameRef = useRef(null);
   const timerIntervalRef = useRef(null);
 
-  // Türkçe dil desteği
-  const tr = {
+  // Dil desteği
+  const translations = {
+    tr: {
     appName: "BeatWolf",
     subtitle: "Saniyeler içinde herhangi bir şarkıyı keşfedin",
     identify: "Tanımla",
