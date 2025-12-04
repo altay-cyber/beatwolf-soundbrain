@@ -230,10 +230,13 @@ async def generate_playlist(request: PlaylistGenerateRequest):
         ).with_model("anthropic", "claude-4-sonnet-20250514")
         
         # Create prompt based on mood or custom prompt
+        import random
+        random_seed = random.randint(1, 100000)
+        
         if request.mood:
-            user_prompt = f"Create a playlist of 10 songs for the mood: {request.mood}. Include a mix of popular and lesser-known tracks. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
+            user_prompt = f"Create a unique playlist of 10 DIFFERENT songs for the mood: {request.mood}. Include a diverse mix of popular and lesser-known tracks. Be creative and avoid common choices. Variation seed: {random_seed}. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
         elif request.prompt:
-            user_prompt = f"Create a playlist of 10 songs based on: {request.prompt}. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
+            user_prompt = f"Create a unique playlist of 10 DIFFERENT songs based on: {request.prompt}. Be creative and include variety. Variation seed: {random_seed}. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
         else:
             raise HTTPException(status_code=400, detail="Either mood or prompt is required")
         
