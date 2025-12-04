@@ -146,6 +146,7 @@ const Home = () => {
   useEffect(() => {
     fetchHistory();
     fetchFavorites();
+    fetchPlaylists();
   }, []);
 
   const fetchHistory = async () => {
