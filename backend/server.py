@@ -206,6 +206,7 @@ class PlaylistTrack(BaseModel):
     album: Optional[str] = None
     artwork: Optional[str] = None
     spotify_url: Optional[str] = None
+    apple_music_url: Optional[str] = None
     preview_url: Optional[str] = None
 
 class GeneratedPlaylist(BaseModel):
