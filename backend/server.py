@@ -337,15 +337,15 @@ Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
                     logger.error(f"Spotify search error for {song}: {str(e)}")
             
             # If no Spotify API, create search URLs
+            import urllib.parse
             if not track_data["spotify_url"]:
                 # Create Spotify search URL
-                import urllib.parse
                 spotify_query = urllib.parse.quote(f"{title} {artist}")
                 track_data["spotify_url"] = f"https://open.spotify.com/search/{spotify_query}"
-                
-                # Create Apple Music search URL
-                apple_query = urllib.parse.quote(f"{title} {artist}")
-                track_data["apple_music_url"] = f"https://music.apple.com/us/search?term={apple_query}"
+            
+            # Always create Apple Music search URL
+            apple_query = urllib.parse.quote(f"{title} {artist}")
+            track_data["apple_music_url"] = f"https://music.apple.com/us/search?term={apple_query}"
             
             tracks.append(PlaylistTrack(**track_data))
         
