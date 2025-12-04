@@ -615,7 +615,7 @@ const Home = () => {
                           </Button>
                         </div>
                         <div className="playlist-tracks">
-                          {playlist.tracks.slice(0, 5).map((track, idx) => (
+                          {playlist.tracks.map((track, idx) => (
                             <div key={idx} className="track-mini">
                               {track.artwork && (
                                 <img src={track.artwork} alt={track.title} className="track-mini-artwork" />
@@ -624,16 +624,24 @@ const Home = () => {
                                 <p className="track-mini-title">{track.title}</p>
                                 <p className="track-mini-artist">{track.artist}</p>
                               </div>
-                              {track.spotify_url && (
-                                <a href={track.spotify_url} target="_blank" rel="noopener noreferrer">
-                                  <Play className="w-4 h-4 text-gray-500 hover:text-gray-700" />
-                                </a>
-                              )}
+                              <div className="track-actions">
+                                {track.spotify_url && (
+                                  <a href={track.spotify_url} target="_blank" rel="noopener noreferrer" title="Spotify">
+                                    <Button size="sm" variant="outline" className="track-link-btn">
+                                      <Play className="w-3 h-3" />
+                                    </Button>
+                                  </a>
+                                )}
+                                {track.apple_music_url && (
+                                  <a href={track.apple_music_url} target="_blank" rel="noopener noreferrer" title="Apple Music">
+                                    <Button size="sm" variant="outline" className="track-link-btn">
+                                      <ExternalLink className="w-3 h-3" />
+                                    </Button>
+                                  </a>
+                                )}
+                              </div>
                             </div>
                           ))}
-                          {playlist.tracks.length > 5 && (
-                            <p className="text-xs text-gray-500 mt-2">+{playlist.tracks.length - 5} more...</p>
-                          )}
                         </div>
                       </CardContent>
                     </Card>
