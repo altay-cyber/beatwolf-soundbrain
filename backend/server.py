@@ -195,6 +195,152 @@ async def delete_favorite(favorite_id: str):
         raise HTTPException(status_code=404, detail="Favorite not found")
     return {"message": "Favorite removed"}
 
+# AI Playlist Generator Models
+class PlaylistGenerateRequest(BaseModel):
+    mood: Optional[str] = None
+    prompt: Optional[str] = None
+
+class PlaylistTrack(BaseModel):
+    title: str
+    artist: str
+    album: Optional[str] = None
+    artwork: Optional[str] = None
+    spotify_url: Optional[str] = None
+    preview_url: Optional[str] = None
+
+class GeneratedPlaylist(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    description: str
+    tracks: List[PlaylistTrack]
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+# AI Playlist Generator Endpoints
+@api_router.post("/playlist/generate")
+async def generate_playlist(request: PlaylistGenerateRequest):
+    try:
+        # Initialize Claude Sonnet 4
+        llm_key = os.environ.get('EMERGENT_LLM_KEY')
+        chat = LlmChat(
+            api_key=llm_key,
+            session_id=str(uuid.uuid4()),
+            system_message="You are a music expert who creates amazing playlists. Generate song recommendations based on user preferences."
+        ).with_model("anthropic", "claude-4-sonnet-20250514")
+        
+        # Create prompt based on mood or custom prompt
+        if request.mood:
+            user_prompt = f"Create a playlist of 10 songs for the mood: {request.mood}. Include a mix of popular and lesser-known tracks. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
+        elif request.prompt:
+            user_prompt = f"Create a playlist of 10 songs based on: {request.prompt}. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
+        else:
+            raise HTTPException(status_code=400, detail="Either mood or prompt is required")
+        
+        # Get AI recommendations
+        message = UserMessage(text=user_prompt)
+        ai_response = await chat.send_message(message)
+        
+        logger.info(f"AI Response: {ai_response}")
+        
+        # Parse JSON from response
+        try:
+            # Extract JSON from response
+            response_text = ai_response.strip()
+            if "```json" in response_text:
+                response_text = response_text.split("```json")[1].split("```")[0].strip()
+            elif "```" in response_text:
+                response_text = response_text.split("```")[1].split("```")[0].strip()
+            
+            songs_data = json.loads(response_text)
+            if "songs" in songs_data:
+                songs_list = songs_data["songs"]
+            else:
+                songs_list = songs_data
+        except Exception as e:
+            logger.error(f"Error parsing AI response: {str(e)}")
+            raise HTTPException(status_code=500, detail="Failed to parse AI recommendations")
+        
+        # Initialize Spotify (no auth needed for search)
+        sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(
+            client_id=os.environ.get('SPOTIFY_CLIENT_ID', ''),
+            client_secret=os.environ.get('SPOTIFY_CLIENT_SECRET', '')
+        )) if os.environ.get('SPOTIFY_CLIENT_ID') else None
+        
+        # Enrich with Spotify data
+        tracks = []
+        for song in songs_list[:10]:  # Limit to 10
+            track_data = {
+                "title": song.get("title", "Unknown"),
+                "artist": song.get("artist", "Unknown"),
+                "album": None,
+                "artwork": None,
+                "spotify_url": None,
+                "preview_url": None
+            }
+            
+            # Try to get Spotify data
+            if sp:
+                try:
+                    query = f"{song.get('title')} {song.get('artist')}"
+                    results = sp.search(q=query, limit=1, type='track')
+                    if results['tracks']['items']:
+                        spotify_track = results['tracks']['items'][0]
+                        track_data["album"] = spotify_track['album']['name']
+                        if spotify_track['album']['images']:
+                            track_data["artwork"] = spotify_track['album']['images'][0]['url']
+                        track_data["spotify_url"] = spotify_track['external_urls']['spotify']
+                        track_data["preview_url"] = spotify_track.get('preview_url')
+                except Exception as e:
+                    logger.error(f"Spotify search error for {song}: {str(e)}")
+            
+            tracks.append(PlaylistTrack(**track_data))
+        
+        # Create playlist object
+        playlist_name = f"{request.mood.title()} Playlist" if request.mood else "Custom Playlist"
+        playlist_desc = f"AI-generated playlist for {request.mood} mood" if request.mood else f"AI-generated playlist: {request.prompt}"
+        
+        playlist = GeneratedPlaylist(
+            name=playlist_name,
+            description=playlist_desc,
+            tracks=tracks
+        )
+        
+        # Save to database
+        doc = {
+            "id": playlist.id,
+            "name": playlist.name,
+            "description": playlist.description,
+            "tracks": [track.model_dump() for track in playlist.tracks],
+            "created_at": playlist.created_at.isoformat()
+        }
+        await db.playlists.insert_one(doc)
+        
+        return playlist
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error generating playlist: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error generating playlist: {str(e)}")
+
+@api_router.get("/playlist/list", response_model=List[GeneratedPlaylist])
+async def list_playlists():
+    playlists = await db.playlists.find({}, {"_id": 0}).sort("created_at", -1).to_list(50)
+    
+    for playlist in playlists:
+        if isinstance(playlist['created_at'], str):
+            playlist['created_at'] = datetime.fromisoformat(playlist['created_at'])
+    
+    return playlists
+
+@api_router.delete("/playlist/{playlist_id}")
+async def delete_playlist(playlist_id: str):
+    result = await db.playlists.delete_one({"id": playlist_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Playlist not found")
+    return {"message": "Playlist deleted"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
