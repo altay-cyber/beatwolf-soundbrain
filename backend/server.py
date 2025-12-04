@@ -11,6 +11,10 @@ import uuid
 from datetime import datetime, timezone
 import aiohttp
 import tempfile
+from emergentintegrations.llm.chat import LlmChat, UserMessage
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+import json
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
