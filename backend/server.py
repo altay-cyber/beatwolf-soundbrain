@@ -294,27 +294,36 @@ Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
             raise HTTPException(status_code=500, detail="Failed to parse AI recommendations")
         
         # Initialize Spotify (no auth needed for search)
-        sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(
-            client_id=os.environ.get('SPOTIFY_CLIENT_ID', ''),
-            client_secret=os.environ.get('SPOTIFY_CLIENT_SECRET', '')
-        )) if os.environ.get('SPOTIFY_CLIENT_ID') else None
+        sp = None
+        try:
+            if os.environ.get('SPOTIFY_CLIENT_ID') and os.environ.get('SPOTIFY_CLIENT_SECRET'):
+                sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(
+                    client_id=os.environ.get('SPOTIFY_CLIENT_ID'),
+                    client_secret=os.environ.get('SPOTIFY_CLIENT_SECRET')
+                ))
+        except Exception as e:
+            logger.warning(f"Spotify initialization failed: {str(e)}")
         
-        # Enrich with Spotify data
+        # Enrich with Spotify data or create search URLs
         tracks = []
         for song in songs_list[:10]:  # Limit to 10
+            title = song.get("title", "Unknown")
+            artist = song.get("artist", "Unknown")
+            album = song.get("album", None)
+            
             track_data = {
-                "title": song.get("title", "Unknown"),
-                "artist": song.get("artist", "Unknown"),
-                "album": None,
+                "title": title,
+                "artist": artist,
+                "album": album,
                 "artwork": None,
                 "spotify_url": None,
                 "preview_url": None
             }
             
-            # Try to get Spotify data
+            # Try to get Spotify data via API
             if sp:
                 try:
-                    query = f"{song.get('title')} {song.get('artist')}"
+                    query = f"track:{title} artist:{artist}"
                     results = sp.search(q=query, limit=1, type='track')
                     if results['tracks']['items']:
                         spotify_track = results['tracks']['items'][0]
@@ -325,6 +334,17 @@ Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
                         track_data["preview_url"] = spotify_track.get('preview_url')
                 except Exception as e:
                     logger.error(f"Spotify search error for {song}: {str(e)}")
+            
+            # If no Spotify API, create search URLs
+            if not track_data["spotify_url"]:
+                # Create Spotify search URL
+                import urllib.parse
+                spotify_query = urllib.parse.quote(f"{title} {artist}")
+                track_data["spotify_url"] = f"https://open.spotify.com/search/{spotify_query}"
+                
+                # Create Apple Music search URL
+                apple_query = urllib.parse.quote(f"{title} {artist}")
+                track_data["apple_music_url"] = f"https://music.apple.com/us/search?term={apple_query}"
             
             tracks.append(PlaylistTrack(**track_data))
         
