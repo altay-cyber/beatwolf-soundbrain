@@ -317,6 +317,7 @@ Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
                 "album": album,
                 "artwork": None,
                 "spotify_url": None,
+                "apple_music_url": None,
                 "preview_url": None
             }
             
