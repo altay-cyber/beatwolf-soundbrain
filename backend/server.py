@@ -248,8 +248,10 @@ CRITICAL REQUIREMENTS:
 
 Variation ID: {random_seed}-{timestamp}
 
-Return ONLY a JSON array with this EXACT format:
-{{"songs": [{{"title": "song name", "artist": "artist name"}}]}}"""
+Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
+{{"songs": [{{"title": "exact song name", "artist": "exact artist name", "album": "album name if known"}}]}}
+
+Example: {{"songs": [{{"title": "Bohemian Rhapsody", "artist": "Queen", "album": "A Night at the Opera"}}]}}"""
         elif request.prompt:
             user_prompt = f"""Create a COMPLETELY UNIQUE playlist of 10 songs based on: {request.prompt}
 
@@ -262,8 +264,8 @@ CRITICAL REQUIREMENTS:
 
 Variation ID: {random_seed}-{timestamp}
 
-Return ONLY a JSON array with this EXACT format:
-{{"songs": [{{"title": "song name", "artist": "artist name"}}]}}"""
+Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
+{{"songs": [{{"title": "exact song name", "artist": "exact artist name", "album": "album name if known"}}]}}"""
         else:
             raise HTTPException(status_code=400, detail="Either mood or prompt is required")
         
