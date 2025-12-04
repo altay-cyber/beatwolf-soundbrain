@@ -231,12 +231,39 @@ async def generate_playlist(request: PlaylistGenerateRequest):
         
         # Create prompt based on mood or custom prompt
         import random
+        from datetime import datetime
         random_seed = random.randint(1, 100000)
+        timestamp = datetime.now().timestamp()
         
         if request.mood:
-            user_prompt = f"Create a unique playlist of 10 DIFFERENT songs for the mood: {request.mood}. Include a diverse mix of popular and lesser-known tracks. Be creative and avoid common choices. Variation seed: {random_seed}. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
+            user_prompt = f"""Create a COMPLETELY UNIQUE playlist of 10 songs for the mood: {request.mood}.
+
+CRITICAL REQUIREMENTS:
+- Generate DIFFERENT songs each time, never repeat previous suggestions
+- Mix popular hits with deep cuts and hidden gems
+- Include songs from different decades (70s, 80s, 90s, 2000s, 2010s, 2020s)
+- Vary genres within the mood (rock, pop, indie, electronic, etc.)
+- Avoid the most obvious/cliché choices
+- Be extremely creative and surprising
+
+Variation ID: {random_seed}-{timestamp}
+
+Return ONLY a JSON array with this EXACT format:
+{{"songs": [{{"title": "song name", "artist": "artist name"}}]}}"""
         elif request.prompt:
-            user_prompt = f"Create a unique playlist of 10 DIFFERENT songs based on: {request.prompt}. Be creative and include variety. Variation seed: {random_seed}. Return ONLY a JSON array with format: {{\"songs\": [{{\"title\": \"song name\", \"artist\": \"artist name\"}}]}}"
+            user_prompt = f"""Create a COMPLETELY UNIQUE playlist of 10 songs based on: {request.prompt}
+
+CRITICAL REQUIREMENTS:
+- Generate DIFFERENT songs each time, never repeat previous suggestions
+- Include both well-known and lesser-known tracks
+- Vary artists and subgenres
+- Be creative and avoid predictable choices
+- Mix classic and modern tracks when appropriate
+
+Variation ID: {random_seed}-{timestamp}
+
+Return ONLY a JSON array with this EXACT format:
+{{"songs": [{{"title": "song name", "artist": "artist name"}}]}}"""
         else:
             raise HTTPException(status_code=400, detail="Either mood or prompt is required")
         
