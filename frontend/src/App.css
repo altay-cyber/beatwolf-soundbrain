@@ -153,19 +153,32 @@ body {
 }
 
 .tab-trigger {
-  padding: 0.625rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 10px;
   background: transparent;
   color: #718096;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .tab-trigger {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.7rem;
+  }
+  
+  .tab-trigger svg {
+    width: 12px;
+    height: 12px;
+    margin-right: 0.25rem;
+  }
 }
 
 .tab-trigger:hover {
