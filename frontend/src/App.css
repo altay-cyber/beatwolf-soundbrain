@@ -122,7 +122,7 @@ body {
 }
 
 .tabs-container {
-  max-width: 550px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -134,6 +134,19 @@ body {
   padding: 0.375rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 0.375rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tabs-list-4 {
+  background: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.375rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.375rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
