@@ -167,6 +167,50 @@ const Home = () => {
     }
   };
 
+  const fetchPlaylists = async () => {
+    try {
+      const response = await axios.get(`${API}/playlist/list`);
+      setPlaylists(response.data);
+    } catch (error) {
+      console.error("Error fetching playlists:", error);
+    }
+  };
+
+  const generatePlaylist = async () => {
+    if (!selectedMood && !customPrompt.trim()) {
+      toast.error(t.selectMood);
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const response = await axios.post(`${API}/playlist/generate`, {
+        mood: selectedMood || undefined,
+        prompt: customPrompt.trim() || undefined,
+      });
+
+      toast.success(t.playlistGenerated);
+      fetchPlaylists();
+      setSelectedMood("");
+      setCustomPrompt("");
+    } catch (error) {
+      console.error("Error generating playlist:", error);
+      toast.error(error.response?.data?.detail || t.couldNotGenerate);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const deletePlaylist = async (id) => {
+    try {
+      await axios.delete(`${API}/playlist/${id}`);
+      toast.success("Playlist deleted");
+      fetchPlaylists();
+    } catch (error) {
+      toast.error("Could not delete playlist");
+    }
+  };
+
   const visualizeAudio = (stream) => {
     audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
     analyserRef.current = audioContextRef.current.createAnalyser();
