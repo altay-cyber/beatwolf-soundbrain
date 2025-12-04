@@ -113,11 +113,35 @@ const Home = () => {
       couldNotDeleteFromHistory: "Could not delete from history",
       couldNotIdentify: "Could not identify song",
       copyright: "© 2025 BeatWolf App. All rights reserved.",
-      poweredBy: "Powered by AudD API"
+      poweredBy: "Powered by AudD API",
+      aiPlaylist: "AI Playlist",
+      generatePlaylist: "Generate Playlist",
+      selectMood: "Select Mood",
+      orEnterPrompt: "or enter custom prompt",
+      promptPlaceholder: "e.g., 90s rock songs",
+      generating: "Generating...",
+      playlistGenerated: "Playlist generated!",
+      couldNotGenerate: "Could not generate playlist",
+      myPlaylists: "My Playlists",
+      noPlaylistsYet: "No playlists yet",
+      generateFirst: "Generate your first playlist with AI",
+      tracks: "tracks",
+      happy: "Happy",
+      sad: "Sad",
+      energetic: "Energetic",
+      calm: "Calm",
+      romantic: "Romantic",
+      party: "Party"
     }
   };
 
   const t = translations[language];
+  
+  // Playlist state
+  const [playlists, setPlaylists] = useState([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [selectedMood, setSelectedMood] = useState("");
+  const [customPrompt, setCustomPrompt] = useState("");
 
   useEffect(() => {
     fetchHistory();
