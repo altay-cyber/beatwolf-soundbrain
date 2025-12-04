@@ -542,6 +542,108 @@ const Home = () => {
           </div>
         </TabsContent>
 
+        <TabsContent value="playlist" className="tab-content">
+          <div className="playlist-section" data-testid="playlist-section">
+            <div className="playlist-generator">
+              <h2 className="section-title">{t.generatePlaylist}</h2>
+              
+              <div className="mood-selector">
+                <label className="mood-label">{t.selectMood}</label>
+                <div className="mood-grid">
+                  {[t.happy, t.sad, t.energetic, t.calm, t.romantic, t.party].map((mood) => (
+                    <button
+                      key={mood}
+                      className={`mood-button ${selectedMood === mood ? 'active' : ''}`}
+                      onClick={() => setSelectedMood(mood)}
+                      data-testid={`mood-${mood}`}
+                    >
+                      {mood}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="prompt-input-section">
+                <label className="prompt-label">{t.orEnterPrompt}</label>
+                <input
+                  type="text"
+                  className="prompt-input"
+                  placeholder={t.promptPlaceholder}
+                  value={customPrompt}
+                  onChange={(e) => setCustomPrompt(e.target.value)}
+                  data-testid="playlist-prompt-input"
+                />
+              </div>
+
+              <Button
+                onClick={generatePlaylist}
+                disabled={isGenerating}
+                className="generate-button"
+                data-testid="generate-playlist-button"
+              >
+                {isGenerating ? t.generating : t.generatePlaylist}
+              </Button>
+            </div>
+
+            <div className="playlists-list">
+              <h2 className="section-title">{t.myPlaylists}</h2>
+              {playlists.length === 0 ? (
+                <div className="empty-state" data-testid="empty-playlists">
+                  <Music className="w-12 h-12 text-gray-400 mb-2" />
+                  <p className="text-gray-600">{t.noPlaylistsYet}</p>
+                  <p className="text-sm text-gray-500">{t.generateFirst}</p>
+                </div>
+              ) : (
+                <div className="playlists-grid">
+                  {playlists.map((playlist) => (
+                    <Card key={playlist.id} className="playlist-card" data-testid="playlist-card">
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900">{playlist.name}</h3>
+                            <p className="text-sm text-gray-600">{playlist.description}</p>
+                            <p className="text-xs text-gray-500 mt-1">{playlist.tracks.length} {t.tracks}</p>
+                          </div>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => deletePlaylist(playlist.id)}
+                            className="text-red-600 hover:text-red-700"
+                            data-testid="delete-playlist-button"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                        <div className="playlist-tracks">
+                          {playlist.tracks.slice(0, 5).map((track, idx) => (
+                            <div key={idx} className="track-mini">
+                              {track.artwork && (
+                                <img src={track.artwork} alt={track.title} className="track-mini-artwork" />
+                              )}
+                              <div className="track-mini-info">
+                                <p className="track-mini-title">{track.title}</p>
+                                <p className="track-mini-artist">{track.artist}</p>
+                              </div>
+                              {track.spotify_url && (
+                                <a href={track.spotify_url} target="_blank" rel="noopener noreferrer">
+                                  <Play className="w-4 h-4 text-gray-500 hover:text-gray-700" />
+                                </a>
+                              )}
+                            </div>
+                          ))}
+                          {playlist.tracks.length > 5 && (
+                            <p className="text-xs text-gray-500 mt-2">+{playlist.tracks.length - 5} more...</p>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </TabsContent>
+
         <TabsContent value="history" className="tab-content">
           <div className="list-section" data-testid="history-list">
             <h2 className="section-title">{t.recentIdentifications}</h2>
