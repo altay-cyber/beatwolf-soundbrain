@@ -123,6 +123,7 @@ async def identify_song(file: UploadFile = File(...)):
         
         # Extract song information
         song_info = {
+            "id": str(uuid.uuid4()),
             "title": song_data.get('title', 'Unknown'),
             "artist": song_data.get('artist', 'Unknown'),
             "album": song_data.get('album', None),
@@ -130,16 +131,12 @@ async def identify_song(file: UploadFile = File(...)):
             "artwork": song_data.get('spotify', {}).get('album', {}).get('images', [{}])[0].get('url') if song_data.get('spotify') else None,
             "preview_url": song_data.get('spotify', {}).get('preview_url') if song_data.get('spotify') else None,
             "spotify_url": song_data.get('spotify', {}).get('external_urls', {}).get('spotify') if song_data.get('spotify') else None,
-            "apple_music_url": song_data.get('apple_music', {}).get('url') if song_data.get('apple_music') else None
+            "apple_music_url": song_data.get('apple_music', {}).get('url') if song_data.get('apple_music') else None,
+            "timestamp": datetime.now(timezone.utc).isoformat()
         }
         
-        # Save to history
-        song_obj = SongIdentification(**song_info)
-        doc = song_obj.model_dump()
-        doc['timestamp'] = doc['timestamp'].isoformat()
-        await db.history.insert_one(doc)
-        
-        return song_obj
+        # Return song info (will be saved in localStorage on frontend)
+        return song_info
     
     except HTTPException:
         raise
