@@ -485,13 +485,13 @@ body {
 
 .prompt-input:focus {
   outline: none;
-  border-color: #2d3748;
+  border-color: #8b5cf6;
 }
 
 .generate-button {
   width: 100%;
   padding: 1rem 2rem;
-  background: #2d3748;
+  background: #8b5cf6;
   color: white;
   border: none;
   border-radius: 12px;
@@ -502,9 +502,9 @@ body {
 }
 
 .generate-button:hover:not(:disabled) {
-  background: #1a202c;
+  background: #7c3aed;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(45, 55, 72, 0.2);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
 .generate-button:disabled {
