@@ -375,28 +375,34 @@ const Home = () => {
 
   const addToFavorites = async (song) => {
     try {
-      await axios.post(`${API}/favorites`, {
-        title: song.title,
-        artist: song.artist,
-        album: song.album,
-        release_date: song.release_date,
-        artwork: song.artwork,
-        preview_url: song.preview_url,
-        spotify_url: song.spotify_url,
-        apple_music_url: song.apple_music_url,
-      });
+      // Check if already in favorites
+      const exists = favorites.some(fav => fav.title === song.title && fav.artist === song.artist);
+      if (exists) {
+        toast.error(t.couldNotAddToFavorites);
+        return;
+      }
+      
+      const newFavorite = {
+        ...song,
+        id: song.id || Date.now().toString(),
+        timestamp: new Date().toISOString()
+      };
+      
+      const newFavorites = [newFavorite, ...favorites];
+      setFavorites(newFavorites);
+      localStorage.setItem('beatwolf_favorites', JSON.stringify(newFavorites));
       toast.success(t.addedToFavorites);
-      fetchFavorites();
     } catch (error) {
-      toast.error(error.response?.data?.detail || t.couldNotAddToFavorites);
+      toast.error(t.couldNotAddToFavorites);
     }
   };
 
   const removeFromFavorites = async (id) => {
     try {
-      await axios.delete(`${API}/favorites/${id}`);
+      const newFavorites = favorites.filter(fav => fav.id !== id);
+      setFavorites(newFavorites);
+      localStorage.setItem('beatwolf_favorites', JSON.stringify(newFavorites));
       toast.success(t.removedFromFavorites);
-      fetchFavorites();
     } catch (error) {
       toast.error(t.couldNotRemoveFromFavorites);
     }
@@ -404,9 +410,10 @@ const Home = () => {
 
   const deleteHistoryItem = async (id) => {
     try {
-      await axios.delete(`${API}/history/${id}`);
+      const newHistory = history.filter(item => item.id !== id);
+      setHistory(newHistory);
+      localStorage.setItem('beatwolf_history', JSON.stringify(newHistory));
       toast.success(t.deletedFromHistory);
-      fetchHistory();
     } catch (error) {
       toast.error(t.couldNotDeleteFromHistory);
     }
