@@ -351,22 +351,15 @@ Return ONLY a JSON array with this EXACT format (no markdown, no extra text):
         playlist_name = f"{request.mood.title()} Playlist" if request.mood else "Custom Playlist"
         playlist_desc = f"AI-generated playlist for {request.mood} mood" if request.mood else f"AI-generated playlist: {request.prompt}"
         
-        playlist = GeneratedPlaylist(
-            name=playlist_name,
-            description=playlist_desc,
-            tracks=tracks
-        )
-        
-        # Save to database
-        doc = {
-            "id": playlist.id,
-            "name": playlist.name,
-            "description": playlist.description,
-            "tracks": [track.model_dump() for track in playlist.tracks],
-            "created_at": playlist.created_at.isoformat()
+        playlist = {
+            "id": str(uuid.uuid4()),
+            "name": playlist_name,
+            "description": playlist_desc,
+            "tracks": [track.model_dump() for track in tracks],
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
-        await db.playlists.insert_one(doc)
         
+        # Return playlist (will be saved in localStorage on frontend)
         return playlist
         
     except HTTPException:
