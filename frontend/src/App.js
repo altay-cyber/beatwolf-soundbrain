@@ -224,8 +224,13 @@ const Home = () => {
         prompt: customPrompt.trim() || undefined,
       });
 
+      // Save to local storage
+      const newPlaylist = response.data;
+      const newPlaylists = [newPlaylist, ...playlists];
+      setPlaylists(newPlaylists);
+      localStorage.setItem('beatwolf_playlists', JSON.stringify(newPlaylists));
+      
       toast.success(t.playlistGenerated);
-      fetchPlaylists();
       setSelectedMood("");
       setCustomPrompt("");
     } catch (error) {
@@ -238,9 +243,10 @@ const Home = () => {
 
   const deletePlaylist = async (id) => {
     try {
-      await axios.delete(`${API}/playlist/${id}`);
+      const newPlaylists = playlists.filter(playlist => playlist.id !== id);
+      setPlaylists(newPlaylists);
+      localStorage.setItem('beatwolf_playlists', JSON.stringify(newPlaylists));
       toast.success("Playlist deleted");
-      fetchPlaylists();
     } catch (error) {
       toast.error("Could not delete playlist");
     }
