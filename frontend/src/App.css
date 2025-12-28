@@ -194,9 +194,9 @@ body {
 }
 
 .tab-trigger[data-state="active"] {
-  background: #2d3748;
+  background: #8b5cf6;
   color: white;
-  box-shadow: 0 4px 12px rgba(45, 55, 72, 0.2);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
 .tab-content {
