@@ -360,7 +360,11 @@ const Home = () => {
 
       setIdentifiedSong(response.data);
       toast.success(`${t.found}: ${response.data.title} ${t.by} ${response.data.artist}`);
-      fetchHistory();
+      
+      // Save to local history
+      const newHistory = [response.data, ...history];
+      setHistory(newHistory);
+      localStorage.setItem('beatwolf_history', JSON.stringify(newHistory));
     } catch (error) {
       console.error("Error identifying song:", error);
       toast.error(error.response?.data?.detail || t.couldNotIdentify);
