@@ -144,35 +144,70 @@ const Home = () => {
   const [customPrompt, setCustomPrompt] = useState("");
 
   useEffect(() => {
-    fetchHistory();
-    fetchFavorites();
-    fetchPlaylists();
+    loadLocalData();
   }, []);
 
-  const fetchHistory = async () => {
-    try {
-      const response = await axios.get(`${API}/history`);
-      setHistory(response.data);
-    } catch (error) {
-      console.error("Error fetching history:", error);
+  const loadLocalData = () => {
+    // Load from localStorage
+    const savedHistory = localStorage.getItem('beatwolf_history');
+    const savedFavorites = localStorage.getItem('beatwolf_favorites');
+    const savedPlaylists = localStorage.getItem('beatwolf_playlists');
+    
+    if (savedHistory) {
+      try {
+        setHistory(JSON.parse(savedHistory));
+      } catch (e) {
+        console.error('Error loading history:', e);
+      }
+    }
+    
+    if (savedFavorites) {
+      try {
+        setFavorites(JSON.parse(savedFavorites));
+      } catch (e) {
+        console.error('Error loading favorites:', e);
+      }
+    }
+    
+    if (savedPlaylists) {
+      try {
+        setPlaylists(JSON.parse(savedPlaylists));
+      } catch (e) {
+        console.error('Error loading playlists:', e);
+      }
     }
   };
 
-  const fetchFavorites = async () => {
-    try {
-      const response = await axios.get(`${API}/favorites`);
-      setFavorites(response.data);
-    } catch (error) {
-      console.error("Error fetching favorites:", error);
+  const fetchHistory = () => {
+    const savedHistory = localStorage.getItem('beatwolf_history');
+    if (savedHistory) {
+      try {
+        setHistory(JSON.parse(savedHistory));
+      } catch (e) {
+        console.error('Error loading history:', e);
+      }
     }
   };
 
-  const fetchPlaylists = async () => {
-    try {
-      const response = await axios.get(`${API}/playlist/list`);
-      setPlaylists(response.data);
-    } catch (error) {
-      console.error("Error fetching playlists:", error);
+  const fetchFavorites = () => {
+    const savedFavorites = localStorage.getItem('beatwolf_favorites');
+    if (savedFavorites) {
+      try {
+        setFavorites(JSON.parse(savedFavorites));
+      } catch (e) {
+        console.error('Error loading favorites:', e);
+      }
+    }
+  };
+
+  const fetchPlaylists = () => {
+    const savedPlaylists = localStorage.getItem('beatwolf_playlists');
+    if (savedPlaylists) {
+      try {
+        setPlaylists(JSON.parse(savedPlaylists));
+      } catch (e) {
+        console.error('Error loading playlists:', e);
+      }
     }
   };
 
