@@ -559,7 +559,7 @@ body {
   padding: 0.5rem;
   border-radius: 8px;
   transition: background 0.2s ease;
-  border-bottom: 1px solid #f7fafc;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .track-mini:last-child {
@@ -567,7 +567,7 @@ body {
 }
 
 .track-mini:hover {
-  background: #f7fafc;
+  background: rgba(139, 92, 246, 0.15);
 }
 
 .track-actions {
