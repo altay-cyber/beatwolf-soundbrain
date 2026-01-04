@@ -163,7 +163,7 @@ body {
   padding: 0.5rem 0.75rem;
   border-radius: 10px;
   background: transparent;
-  color: #718096;
+  color: rgba(255, 255, 255, 0.7);
   border: none;
   cursor: pointer;
   font-weight: 600;
@@ -189,8 +189,8 @@ body {
 }
 
 .tab-trigger:hover {
-  background: #f7fafc;
-  color: #2d3748;
+  background: rgba(139, 92, 246, 0.2);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .tab-trigger[data-state="active"] {
