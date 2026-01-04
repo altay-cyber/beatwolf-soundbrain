@@ -61,7 +61,7 @@ const Home = () => {
     deletedFromHistory: "Geçmişten silindi",
     couldNotDeleteFromHistory: "Geçmişten silinemedi",
     couldNotIdentify: "Şarkı tanımlanamadı",
-    copyright: "© 2025 BeatWolf App. Tüm hakları saklıdır.",
+    copyright: "© 2025-2026 BeatWolf App. Tüm hakları saklıdır.",
     poweredBy: "Powered by AudD API",
     aiPlaylist: "AI Playlist",
     generatePlaylist: "Playlist Oluştur",
