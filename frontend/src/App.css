@@ -603,7 +603,7 @@ body {
 .track-mini-title {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2d3748;
+  color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -611,7 +611,7 @@ body {
 
 .track-mini-artist {
   font-size: 0.75rem;
-  color: #718096;
+  color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
