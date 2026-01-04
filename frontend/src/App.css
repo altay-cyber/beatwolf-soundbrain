@@ -8,9 +8,9 @@
 
 body {
   font-family: 'Space Grotesk', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #dde3ea 100%);
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #3730a3 100%);
   min-height: 100vh;
-  color: #1a202c;
+  color: white;
 }
 
 .App {
