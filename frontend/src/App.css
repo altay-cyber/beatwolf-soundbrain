@@ -415,11 +415,12 @@ body {
 }
 
 .playlist-generator {
-  background: white;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .mood-selector {
@@ -429,7 +430,7 @@ body {
 .mood-label {
   display: block;
   font-weight: 600;
-  color: #2d3748;
+  color: white;
   margin-bottom: 0.75rem;
 }
 
@@ -441,9 +442,9 @@ body {
 
 .mood-button {
   padding: 0.75rem 1rem;
-  border: 2px solid #e2e8f0;
-  background: white;
-  color: #718096;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.1);
+  color: rgba(255, 255, 255, 0.8);
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -451,8 +452,8 @@ body {
 }
 
 .mood-button:hover {
-  border-color: #cbd5e0;
-  background: #f7fafc;
+  border-color: rgba(167, 139, 250, 0.5);
+  background: rgba(139, 92, 246, 0.15);
 }
 
 .mood-button.active {
@@ -468,7 +469,7 @@ body {
 .prompt-label {
   display: block;
   font-weight: 600;
-  color: #2d3748;
+  color: white;
   margin-bottom: 0.75rem;
   text-align: center;
   font-size: 0.875rem;
@@ -477,10 +478,16 @@ body {
 .prompt-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.1);
+  color: white;
   border-radius: 12px;
   font-size: 1rem;
   transition: all 0.2s ease;
+}
+
+.prompt-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .prompt-input:focus {
