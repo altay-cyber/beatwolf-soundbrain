@@ -340,35 +340,35 @@ body {
 }
 
 .song-card {
-  background: white;
+  background: rgba(139, 92, 246, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .song-card:hover {
-  background: white;
-  border-color: #cbd5e0;
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(167, 139, 250, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .song-action-button {
-  background: #f7fafc;
-  border: 1px solid #e2e8f0;
-  color: #2d3748;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: white;
   transition: all 0.2s ease;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
 .song-action-button:hover {
-  background: #edf2f7;
-  border-color: #cbd5e0;
-  color: #1a202c;
+  background: rgba(139, 92, 246, 0.3);
+  border-color: rgba(167, 139, 250, 0.5);
+  color: white;
 }
 
 .list-section {
