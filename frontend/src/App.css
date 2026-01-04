@@ -410,6 +410,14 @@ body {
   text-align: center;
 }
 
+.empty-state p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.empty-state p.text-sm {
+  color: rgba(255, 255, 255, 0.6);
+}
+
 /* Playlist Styles */
 .playlist-section {
   padding: 1rem 0;
