@@ -112,7 +112,7 @@ const Home = () => {
       deletedFromHistory: "Deleted from history",
       couldNotDeleteFromHistory: "Could not delete from history",
       couldNotIdentify: "Could not identify song",
-      copyright: "© 2025 BeatWolf App. All rights reserved.",
+      copyright: "© 2025-2026 BeatWolf App. All rights reserved.",
       poweredBy: "Powered by AudD API",
       aiPlaylist: "AI Playlist",
       generatePlaylist: "Generate Playlist",
