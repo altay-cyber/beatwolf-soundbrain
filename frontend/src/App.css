@@ -536,16 +536,16 @@ body {
 }
 
 .playlist-card {
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
   transition: all 0.3s ease;
 }
 
 .playlist-card:hover {
-  border-color: #cbd5e0;
+  border-color: rgba(167, 139, 250, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .playlist-tracks {
