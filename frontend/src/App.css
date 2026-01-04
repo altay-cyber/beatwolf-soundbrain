@@ -621,19 +621,22 @@ body {
   text-align: center;
   margin-top: 4rem;
   padding: 2rem 0;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .copyright {
-  font-size: 0.875rem;
-  color: #718096;
+  font-size: 0.9rem;
+  color: white;
   margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .powered-by {
-  font-size: 0.875rem;
-  color: #a0aec0;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 /* Scrollbar styling */
