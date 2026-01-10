@@ -654,14 +654,19 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f7fafc;
+  background: rgba(139, 92, 246, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
+  background: rgba(139, 92, 246, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a0aec0;
+  background: rgba(139, 92, 246, 0.7);
+}
+
+/* Hide Emergent badge */
+#emergent-badge {
+  display: none !important;
 }
