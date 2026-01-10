@@ -371,6 +371,11 @@ const Home = () => {
       const newHistory = [response.data, ...history];
       setHistory(newHistory);
       localStorage.setItem('beatwolf_history', JSON.stringify(newHistory));
+      
+      // Auto stop recording after successful identification
+      if (isRecording) {
+        stopRecording();
+      }
     } catch (error) {
       console.error("Error identifying song:", error);
       toast.error(error.response?.data?.detail || t.couldNotIdentify);
