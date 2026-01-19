@@ -32,7 +32,11 @@ git clone [https://github.com/altay-cyber/beatwolf-soundbrain.git](https://githu
 cd beatwolf-soundbrain
 
 # Install dependencies
-pip install -r requirements.txt from soundbrain import Processor
+pip install -r requirements.txt
+
+💻 Quick Start
+
+​Extracting features from an audio file in 3 lines of code:from soundbrain import Processor
 
 # Initialize the engine
 brain = Processor(input_source="audio.wav")
@@ -41,4 +45,19 @@ brain = Processor(input_source="audio.wav")
 features = brain.extract_features(type="mfcc")
 print(f"Extracted {len(features)} audio vectors.")
 
-
+🗺 Roadmap & NGI Zero Alignment
+​We are aligning our development goals with the NGI Zero Entrust requirements:
+​[ ] Phase 1: Refactoring core DSP modules for 100% test coverage.
+​[ ] Phase 2: Implementing decentralized audio metadata synchronization via IPFS.
+​[ ] Phase 3: Adding support for hardware-accelerated inference (TensorRT/ONNX).
+​
+🤝 Contributing
+​Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+​Fork the Project
+​Create your Feature Branch (git checkout -b feature/AmazingFeature)
+​Commit your Changes (git commit -m 'Add some AmazingFeature')
+​Push to the Branch (git push origin feature/AmazingFeature)
+​Open a Pull Request
+​
+📜 License
+​Distributed under the MIT License. See LICENSE for more information.
